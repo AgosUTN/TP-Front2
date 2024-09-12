@@ -1,0 +1,75 @@
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.row {
+  flex: 1;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.col-sm-2,
+.col-sm-10 {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-box {
+  display: flex;
+  justify-content: center;
+}
+hr.hr-color {
+  background-color: rgb(241, 242, 242);
+  height: 2px;
+}
+
+.sidebarCustom li.active {
+  background: #eee;
+  border-radius: 8px;
+}
+
+.sidebarCustom li.active a,
+.sidebarCustom li.active a:hover {
+  color: #000;
+}
+
+.sidebarCustom li a:hover {
+  color: grey;
+}
+.sidebarCustom li a {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  #side_nav {
+    position: fixed;
+    top: 56px;
+    left: -250px;
+    bottom: 0;
+    width: 250px;
+    z-index: 1;
+
+    transition: 0.3s;
+  }
+  #side_nav.active {
+    left: 0;
+  }
+  .active_sidebarButton {
+    background-color: #4356c3; /* Fondo del botón cuando la sidebar esté activa */
+    border-color: #41b9af;
+  }
+
+  .col-sm-10 {
+    width: 100%; /* FUNDAMENTAL ESTO, si no aparece una columna blanca a la derecha debido a que sigue ocupando solo 10 columnas de la grilla. */
+  }
+}
