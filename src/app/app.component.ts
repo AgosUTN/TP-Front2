@@ -13,11 +13,11 @@ export class AppComponent {
   title = 'TP-FrontEnd';
 
   menuItems = [
-    { label: 'Libros', icon: 'fa-solid fa-book' },
-    { label: 'Préstamos', icon: 'fa-solid fa-clipboard' },
-    { label: 'Editoriales', icon: 'fa-solid fa-stamp' },
-    { label: 'Autores', icon: 'fa-solid fa-feather' },
-    { label: 'Sanciones', icon: '' },
+    { label: 'Libros', icon: 'fa-solid fa-book', url: '' },
+    { label: 'Préstamos', icon: 'fa-solid fa-clipboard', url: '/prestamoAlta' },
+    { label: 'Editoriales', icon: 'fa-solid fa-stamp', url: '/editorialAlta' },
+    { label: 'Autores', icon: 'fa-solid fa-feather', url: '' },
+    { label: 'Sanciones', icon: '', url: '' },
   ];
   activeIndex: number = 0;
   setActive(index: number) {

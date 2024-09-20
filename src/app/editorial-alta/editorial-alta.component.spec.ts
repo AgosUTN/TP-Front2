@@ -8,9 +8,8 @@ describe('EditorialAltaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorialAltaComponent]
-    })
-    .compileComponents();
+      imports: [EditorialAltaComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditorialAltaComponent);
     component = fixture.componentInstance;

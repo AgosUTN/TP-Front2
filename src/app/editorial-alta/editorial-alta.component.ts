@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditorialServicioService } from '../servicios/editorial-servicio.service.js';
@@ -9,11 +9,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { ModalErrorComponent } from '../modal-error/modal-error.component.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editorial-alta',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ModalErrorComponent],
   templateUrl: './editorial-alta.component.html',
   styleUrl: './editorial-alta.component.css',
   animations: [
@@ -29,7 +31,12 @@ import {
   ],
 })
 export class EditorialAltaComponent {
-  constructor(private editorialServicio: EditorialServicioService) {}
+  constructor(
+    private editorialServicio: EditorialServicioService,
+    private router: Router
+  ) {}
+
+  @ViewChild(ModalErrorComponent) modalErrorComponent!: ModalErrorComponent;
 
   nombre = new FormControl('', [Validators.maxLength(50), Validators.required]);
   showSuccessDiv = false;
@@ -46,16 +53,19 @@ export class EditorialAltaComponent {
         },
         error: (err) => {
           if (err.status === 400) {
+            this.openModal();
           } else {
-            console.log('Redirigiendo a 404...');
+            this.router.navigate(['/404']);
           }
         },
       });
     } else {
-      console.log(
-        'Por favor, complete correctamente todos los campos requeridos.'
-      );
+      this.openModal();
     }
-    console.log('Formulario enviado');
+  }
+  openModal() {
+    if (this.modalErrorComponent) {
+      this.modalErrorComponent.open();
+    }
   }
 }
