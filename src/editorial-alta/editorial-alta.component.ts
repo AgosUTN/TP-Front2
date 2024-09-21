@@ -1,7 +1,7 @@
 import { Component, ViewChild, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { EditorialServicioService } from '../servicios/editorial-servicio.service.js';
+import { EditorialServicioService } from '../app/servicios/editorial-servicio.service.js';
 import {
   animate,
   state,
@@ -9,7 +9,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { ModalErrorComponent } from '../modal-error/modal-error.component.js';
+import { ModalErrorComponent } from '../app/modal-error/modal-error.component.js';
 import { Router } from '@angular/router';
 
 @Component({

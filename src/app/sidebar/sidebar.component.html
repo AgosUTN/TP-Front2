@@ -12,11 +12,14 @@
   <ul class="list-unstyled px-2 sidebarCustom">
     <li
       *ngFor="let item of menuItems; let i = index"
-      (click)="setActive(i)"
-      [class.active]="activeIndex === i"
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: true }"
       class=""
     >
-      <a href="{{ item.url }}" class="text-decoration-none px-3 py-2 d-block">
+      <a
+        [routerLink]="[item.url]"
+        class="text-decoration-none px-3 py-2 d-block"
+      >
         <i [ngClass]="item.icon"></i> {{ item.label }}
       </a>
     </li>
