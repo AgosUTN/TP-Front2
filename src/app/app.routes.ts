@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { PrestamoAltaComponent } from './prestamo-alta/prestamo-alta.component.js';
-import { EditorialAltaComponent } from '../editorial-alta/editorial-alta.component.js';
+import { EditorialAltaComponent } from './editorial-alta/editorial-alta.component.js';
 import { Error404Component } from './error404/error404.component.js';
 import { ListadoEditorialComponent } from './listado-editorial/listado-editorial.component.js';
 

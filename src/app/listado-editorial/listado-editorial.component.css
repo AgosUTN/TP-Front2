@@ -1,3 +1,14 @@
 :host {
   height: 100%;
 }
+
+#listado {
+  height: 100%;
+}
+#contenedor-listado {
+  margin-bottom: 10%;
+}
+.table {
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}

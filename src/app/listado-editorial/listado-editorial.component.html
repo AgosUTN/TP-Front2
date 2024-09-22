@@ -1,1 +1,31 @@
-<h1 class="text-dark">Hola mundo</h1>
+<div class="d-flex align-items-center justify-content-center" id="listado">
+  <div class="col-8" id="contenedor-listado">
+    <table class="table table-hover table-bordered fs-5 tableCustom">
+      <thead class="table-primary">
+        <tr>
+          <th class="col-2"># ID</th>
+          <th class="col-4">Nombre editorial</th>
+          <th class="col-4">Cantidad de libros</th>
+          <th class="col-1">Editar</th>
+          <th class="col-1">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let editorial of editoriales | filtro">
+          <td>{{ editorial.id }}</td>
+          <td>{{ editorial.nombre }}</td>
+          <td>{{ 0 }}</td>
+          <td><button class="btn btn-primary">U</button></td>
+          <td><button class="btn btn-danger">X</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <nav>
+      <ul class="pagination pagination-lg">
+        <li class="page-item"><button class="page-link">Previous</button></li>
+
+        <li class="page-item"><button class="page-link">Next</button></li>
+      </ul>
+    </nav>
+  </div>
+</div>
