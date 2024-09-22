@@ -1,30 +1,50 @@
 <div class="d-flex align-items-center justify-content-center" id="listado">
-  <div class="col-8" id="contenedor-listado">
-    <table class="table table-hover table-bordered fs-5 tableCustom">
-      <thead class="table-primary">
-        <tr>
-          <th class="col-2"># ID</th>
-          <th class="col-4">Nombre editorial</th>
-          <th class="col-4">Cantidad de libros</th>
-          <th class="col-1">Editar</th>
-          <th class="col-1">Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let editorial of editoriales | filtro">
-          <td>{{ editorial.id }}</td>
-          <td>{{ editorial.nombre }}</td>
-          <td>{{ 0 }}</td>
-          <td><button class="btn btn-primary">U</button></td>
-          <td><button class="btn btn-danger">X</button></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="col-8" id="contenedor-listado-paginacion">
+    <div class="col-8 table-responsive" id="contenedor-listado">
+      <table class="table table-hover fs-5 tableCustom">
+        <thead class="table-primary">
+          <tr>
+            <th class="col-2"># ID</th>
+            <th class="col-4">Nombre editorial</th>
+            <th class="col-4">Cantidad de libros</th>
+            <th class="col-1 text-center">Editar</th>
+            <th class="col-1 text-center">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let editorial of paginatedEditoriales">
+            <td>{{ editorial.id }}</td>
+            <td>{{ editorial.nombre }}</td>
+            <td>{{ 0 }}</td>
+            <td class="text-center">
+              <button class="btn btn-primary" *ngIf="editorial.id">U</button>
+            </td>
+            <td class="text-center">
+              <button class="btn btn-danger" *ngIf="editorial.id">X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <nav>
       <ul class="pagination pagination-lg">
-        <li class="page-item"><button class="page-link">Previous</button></li>
-
-        <li class="page-item"><button class="page-link">Next</button></li>
+        <li class="page-item">
+          <button class="page-link" (click)="previousPage()">Anterior</button>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="setPage(1)">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">{{ currentPage }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="setPage(totalPages)">{{
+            totalPages
+          }}</a>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="nextPage()">Siguiente</button>
+        </li>
       </ul>
     </nav>
   </div>
