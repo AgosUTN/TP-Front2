@@ -11,4 +11,16 @@ export class PaginationService {
     const endIndex = startIndex + pageSize;
     return items.slice(startIndex, endIndex);
   }
+  filterItems(items: any[], searchText: string, searchField: string): any[] {
+    if (!searchText) return items;
+
+    searchText = searchText.toLowerCase();
+    return items.filter((item) =>
+      item[searchField].toLowerCase().includes(searchText)
+    );
+  }
+
+  getTotalPages(items: any[], pageSize: number): number {
+    return Math.ceil(items.length / pageSize) || 1;
+  }
 }

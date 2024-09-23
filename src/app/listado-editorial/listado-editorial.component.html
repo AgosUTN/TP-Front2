@@ -2,9 +2,19 @@
   <div class="col-11" id="contenedor-listado-paginacion">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" placeholder="Nombre editorial" />
-          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        <form class="d-flex">
+          <input
+            class="form-control me-2"
+            placeholder="Nombre editorial"
+            [formControl]="searchText"
+          />
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="updatePagination()"
+          >
+            Buscar
+          </button>
         </form>
       </div>
     </nav>
@@ -52,9 +62,7 @@
           <a class="page-link">{{ currentPage }}</a>
         </li>
         <li class="page-item">
-          <a class="page-link" (click)="setPage(totalPages)">{{
-            totalPages
-          }}</a>
+          <a class="page-link" (click)="(totalPages)">{{ totalPages }}</a>
         </li>
         <li class="page-item">
           <button
