@@ -12,6 +12,7 @@
 #contenedor-listado-paginacion {
   margin-bottom: 10%;
   margin-top: 2%;
+  margin-right: 2%;
 }
 
 /* CSS TABLA */
@@ -20,7 +21,7 @@
   border-radius: 5px; /* Borde redondeado */
   border-collapse: separate; /* Para que el border-radius funcione */
   border-spacing: 0; /* Elimina el espacio entre celdas */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  box-shadow: 0 4px 10px rgba(91, 131, 241, 0.2); /* Sombra */
 }
 
 .tableCustom tr:first-child th:first-child {

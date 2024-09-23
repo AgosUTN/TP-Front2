@@ -1,6 +1,14 @@
 <div class="d-flex align-items-center justify-content-center" id="listado">
-  <div class="col-8" id="contenedor-listado-paginacion">
-    <div class="col-8 table-responsive" id="contenedor-listado">
+  <div class="col-11" id="contenedor-listado-paginacion">
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" placeholder="Nombre editorial" />
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>
+    <div class="col-11 table-responsive" id="contenedor-listado">
       <table class="table table-hover fs-5 tableCustom">
         <thead class="table-primary">
           <tr>
@@ -29,7 +37,13 @@
     <nav>
       <ul class="pagination pagination-lg">
         <li class="page-item">
-          <button class="page-link" (click)="previousPage()">Anterior</button>
+          <button
+            class="page-link"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
         </li>
         <li class="page-item">
           <a class="page-link" (click)="setPage(1)">1</a>
@@ -43,7 +57,13 @@
           }}</a>
         </li>
         <li class="page-item">
-          <button class="page-link" (click)="nextPage()">Siguiente</button>
+          <button
+            class="page-link"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
         </li>
       </ul>
     </nav>
