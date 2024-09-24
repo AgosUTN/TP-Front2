@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { PaginationService } from '../servicios/pagination.service.js';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listado-editorial',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './listado-editorial.component.html',
   styleUrl: './listado-editorial.component.css',
 })
