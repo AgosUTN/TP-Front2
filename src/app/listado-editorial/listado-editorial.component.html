@@ -92,6 +92,23 @@
             Siguiente
           </button>
         </li>
+        <button
+          type="button"
+          class="btn"
+          id="popover"
+          popoverTitle="Borrar Editorial"
+          [autoClose]="true"
+          ngbPopover="Para borrar una Editorial, esta no debe tener ningún libro."
+          #popover="ngbPopover"
+          (shown)="onPopoverShow()"
+          (hidden)="onPopoverHide()"
+        >
+          <i
+            [ngClass]="{ 'hover-active': isPopoverActive }"
+            class="fa-solid fa-circle-exclamation"
+            style="color: #cfe2ff; font-size: 50px"
+          ></i>
+        </button>
       </ul>
     </nav>
   </div>

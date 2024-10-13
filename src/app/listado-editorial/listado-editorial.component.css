@@ -44,6 +44,17 @@
 }
 
 /*Fin CSS tabla*/
+#popover {
+  margin-left: auto;
+}
+.hover-active {
+  color: #050d14 !important;
+}
+#popover:hover i {
+  color: #050d14 !important; /* Color del ícono cuando se hace hover */
+
+  transition: all 0.3s ease; /* Suaviza la transición */
+}
 
 @media (max-width: 768px) {
   /*Sobreescribe la clase .pagination para no romper resolucion mobile*/
@@ -61,5 +72,8 @@
   .pagination-lg .page-item:last-child .page-link {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
+  }
+  #popover {
+    font-size: 15px;
   }
 }

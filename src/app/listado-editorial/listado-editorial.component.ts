@@ -7,6 +7,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-listado-editorial',
@@ -17,6 +18,7 @@ import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
     RouterModule,
     ModalDeleteComponent,
     ModalDeleteComponent,
+    NgbPopoverModule,
   ],
   templateUrl: './listado-editorial.component.html',
   styleUrl: './listado-editorial.component.css',
@@ -36,6 +38,7 @@ export class ListadoEditorialComponent {
   // Inicializaciones
   currentPage = 1;
   totalPages = 0;
+  isPopoverActive = false;
 
   searchText = new FormControl('');
   constructor(
@@ -139,6 +142,13 @@ export class ListadoEditorialComponent {
       console.log('Borrado cancelado');
       this.idEditorialBorrar = undefined;
     }
+  }
+  onPopoverShow() {
+    this.isPopoverActive = true;
+  }
+
+  onPopoverHide() {
+    this.isPopoverActive = false;
   }
 }
 
