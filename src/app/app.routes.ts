@@ -6,8 +6,10 @@ import { ListadoEditorialComponent } from './listado-editorial/listado-editorial
 
 export const routes: Routes = [
   { path: 'prestamoAlta', component: PrestamoAltaComponent },
-  { path: 'editorialAlta', component: EditorialAltaComponent },
-  { path: 'listadoEditorial', component: ListadoEditorialComponent },
+  { path: 'editorial', redirectTo: 'editorial/listado', pathMatch: 'full' },
+  { path: 'editorial/actualizar/:id', component: EditorialAltaComponent },
+  { path: 'editorial/alta', component: EditorialAltaComponent },
+  { path: 'editorial/listado', component: ListadoEditorialComponent },
   { path: '', redirectTo: 'prestamoAlta', pathMatch: 'full' },
   { path: '**', component: Error404Component },
 ];

@@ -1,5 +1,10 @@
 export interface Editorial {
   id?: number;
   nombre: string;
-  // cantidadLibros: number;
+}
+
+export interface EditorialCount {
+  id?: number;
+  nombre: string;
+  cantLibros: number;
 }

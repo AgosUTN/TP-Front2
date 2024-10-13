@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Editorial } from '../models/editorial.model.js';
+import { Editorial, EditorialCount } from '../models/editorial.model.js';
 import { EditorialServicioService } from '../servicios/editorial-servicio.service.js';
 import { CommonModule } from '@angular/common';
 import { PaginationService } from '../servicios/pagination.service.js';
@@ -15,10 +15,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './listado-editorial.component.css',
 })
 export class ListadoEditorialComponent {
-  editoriales: Editorial[] = [];
+  editoriales: EditorialCount[] = [];
   error: string | null = null;
 
-  paginatedEditoriales: Editorial[] = [];
+  paginatedEditoriales: EditorialCount[] = [];
 
   // Constantes
   pageSize = 10;
@@ -53,9 +53,7 @@ export class ListadoEditorialComponent {
         this.updatePagination();
       },
       error: (err) => {
-        (this.editoriales = [
-          { id: 0, nombre: 'No data' /*cantidadLibros: 0 */ },
-        ]),
+        (this.editoriales = [{ id: 0, nombre: 'No data', cantLibros: 0 }]),
           (this.error = err.message);
         console.log('Error al cargar las editoriales', err);
         // No está mal, pero deberia incluir más feedback
@@ -105,8 +103,13 @@ export class ListadoEditorialComponent {
       this.paginatedEditoriales.push({
         id: undefined,
         nombre: '',
+        cantLibros: 0,
       });
     }
+  }
+
+  deleteEditorial(id: number) {
+    this.editorialServicio.deleteEditorial(id).subscribe(() => {});
   }
 }
 
