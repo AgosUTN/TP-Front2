@@ -13,6 +13,7 @@ import {
 import { ModalErrorComponent } from '../modal-error/modal-error.component.js';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { unsubscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-editorial-alta',
@@ -46,6 +47,7 @@ export class EditorialAltaComponent {
   tipoFormulario: string = 'Crear Editorial';
   isEditing = false;
   messageSuccess = '';
+  repetido = false;
   ngOnInit() {
     this.route.params.subscribe((params) => {
       const id = params['id'];
@@ -96,6 +98,13 @@ export class EditorialAltaComponent {
       error: (err) => {
         if (err.status === 400) {
           this.openModal();
+        } else if (err.status === 409) {
+          this.repetido = true;
+          const subscription = this.nombre.valueChanges.subscribe(() => {
+            this.repetido = false;
+
+            subscription.unsubscribe();
+          });
         } else {
           this.router.navigate(['/404']); // No me parece mal esto ya que si el id no existe y se mando la solicitud, es porque el usario manipulo mal el front.
         }

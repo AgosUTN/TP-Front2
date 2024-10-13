@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Editorial, EditorialCount } from '../models/editorial.model.js';
 import { EditorialServicioService } from '../servicios/editorial-servicio.service.js';
 import { CommonModule } from '@angular/common';
@@ -6,23 +6,32 @@ import { PaginationService } from '../servicios/pagination.service.js';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 
 @Component({
   selector: 'app-listado-editorial',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    ModalDeleteComponent,
+    ModalDeleteComponent,
+  ],
   templateUrl: './listado-editorial.component.html',
   styleUrl: './listado-editorial.component.css',
 })
 export class ListadoEditorialComponent {
+  @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
   editoriales: EditorialCount[] = [];
   error: string | null = null;
 
   paginatedEditoriales: EditorialCount[] = [];
-
+  idEditorialBorrar?: number;
   // Constantes
   pageSize = 10;
   searchField = 'nombre';
+  mensajeModal = '¿Estás seguro que deseas borrar la Editorial?';
 
   // Inicializaciones
   currentPage = 1;
@@ -58,6 +67,7 @@ export class ListadoEditorialComponent {
         console.log('Error al cargar las editoriales', err);
         // No está mal, pero deberia incluir más feedback
         // Usar un modal con el mensaje o una bandera para mostrar un div.
+        //13/10/24 --> Usar un servicio que intercepte el status 0 para redirigir a un componente/pagina que informe la caida del servidor.
       },
     });
   }
@@ -108,9 +118,28 @@ export class ListadoEditorialComponent {
     }
   }
 
-  deleteEditorial(id: number) {
-    this.editorialServicio.deleteEditorial(id).subscribe(() => {});
+  eliminarEditorial1(id: number, nombre: string) {
+    this.idEditorialBorrar = id;
+    if (this.modalDeleteComponent) {
+      this.modalDeleteComponent.open(nombre);
+    }
+  }
+  eliminarEditorial2() {
+    this.editorialServicio
+      .deleteEditorial(this.idEditorialBorrar!)
+      .subscribe((response) => {
+        this.loadEditoriales();
+        this.idEditorialBorrar = undefined;
+      });
+  }
+  handleDelete(confirmacion: boolean) {
+    if (confirmacion) {
+      this.eliminarEditorial2();
+    } else {
+      console.log('Borrado cancelado');
+      this.idEditorialBorrar = undefined;
+    }
   }
 }
 
-// Manejar el caso de no poder conectar con el servidor.
+// Manejar el caso de no poder conectar con el servidor. Idea en .txt ideas.

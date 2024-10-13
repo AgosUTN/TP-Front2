@@ -19,7 +19,9 @@
               <small *ngIf="nombre.errors['maxlength']"
                 >El nombre no puede superar los 15 caracteres.</small
               >
+              <br />
             </div>
+            <small *ngIf="repetido">El nombre ingresado ya está en uso.</small>
           </div>
         </div>
 
