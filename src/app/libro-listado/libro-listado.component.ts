@@ -56,9 +56,7 @@ export class LibroListadoComponent {
     this.loadLibros();
     this.setupSearchListener();
   }
-  eliminarLibro1(a: number, b: string) {
-    console.log('ASD');
-  }
+
   loadLibros() {
     this.libroServicio.getLibros().subscribe({
       next: (libros) => {
