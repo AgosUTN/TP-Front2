@@ -9,7 +9,7 @@
 .card {
   padding: 30px 40px;
   margin-top: 5%;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   border: none !important;
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
 }
@@ -42,6 +42,8 @@ button {
 
 .successCustom {
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+  margin-right: auto;
 }
 .custom-textarea {
   min-height: 20vh; /* Ajusta según tus necesidades */
@@ -71,4 +73,13 @@ button {
 .no-spin::-webkit-outer-spin-button {
   -webkit-appearance: none; /* Desactiva la apariencia predeterminada */
   margin: 0; /* Elimina márgenes si es necesario */
+}
+.link-volver {
+  color: black;
+  font-size: 22px !important;
+  font-weight: 300;
+  cursor: pointer;
+}
+.link-volver:hover {
+  color: blue;
 }

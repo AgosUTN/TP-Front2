@@ -25,7 +25,10 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListadoEditorialLiteComponent {
   @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
-  @Output() idEmitido: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() datosEditorial: EventEmitter<{ id: number; nombre: string }> =
+    new EventEmitter<{ id: number; nombre: string }>();
+
   editoriales: EditorialCount[] = [];
   error: string | null = null;
 
@@ -120,8 +123,8 @@ export class ListadoEditorialLiteComponent {
     }
   }
 
-  emitirId(id: number) {
-    this.idEmitido.emit(id);
-    console.log(id);
+  emitirDatos(idP: number, nombreP: string) {
+    const datos = { id: idP, nombre: nombreP };
+    this.datosEditorial.emit(datos);
   }
 }

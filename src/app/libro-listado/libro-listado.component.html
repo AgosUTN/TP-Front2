@@ -5,7 +5,7 @@
         <form class="d-flex">
           <input
             class="form-control me-2"
-            placeholder="Nombre editorial"
+            placeholder="Nombre libro"
             [formControl]="searchText"
           />
           <button
@@ -16,8 +16,8 @@
             Buscar
           </button>
         </form>
-        <button class="btn btn-primary" [routerLink]="['/editorial/alta']">
-          Nueva editorial
+        <button class="btn btn-primary" [routerLink]="['/libro/alta']">
+          Nuevo Libro
         </button>
       </div>
     </nav>
@@ -26,22 +26,27 @@
         <thead class="table-primary">
           <tr>
             <th class="col-2"># ID</th>
-            <th class="col-4">Nombre editorial</th>
-            <th class="col-4">Cantidad de libros</th>
+            <th class="col-4">Título</th>
+            <th class="col-2">ISBN</th>
+            <th class="col-2">Cantidad de ejemplares</th>
+
             <th class="col-1 text-center">Editar</th>
             <th class="col-1 text-center">Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let editorial of paginatedEditoriales">
-            <td>{{ editorial.id }}</td>
-            <td>{{ editorial.nombre }}</td>
-            <td>{{ editorial.cantLibros }}</td>
+          <tr *ngFor="let libro of paginatedLibros">
+            <td class="clickeable" (click)="openScrollableContent(libro)">
+              {{ libro.id }}
+            </td>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.isbn }}</td>
+            <td>{{ libro.codigoEjemplarActual }}</td>
             <td class="text-center">
               <button
                 class="btn btn-primary"
-                *ngIf="editorial.id"
-                [routerLink]="['/editorial/actualizar', editorial.id]"
+                *ngIf="libro.id"
+                [routerLink]="['/libro/actualizar', libro.id]"
               >
                 <i class="fas fa-edit"></i>
               </button>
@@ -50,9 +55,9 @@
               <button
                 type="button"
                 class="btn btn-danger"
-                *ngIf="editorial.id"
-                (click)="openDeleteModal(editorial.id, editorial.nombre)"
-                [disabled]="editorial.cantLibros != 0"
+                *ngIf="libro.id"
+                (click)="openDeleteModal(libro.id, libro.titulo)"
+                [disabled]="libro.codigoEjemplarActual != 0"
               >
                 <i class="fas fa-trash-alt"></i>
               </button>
@@ -96,9 +101,9 @@
           type="button"
           class="btn"
           id="popover"
-          popoverTitle="Borrar Editorial"
+          popoverTitle="Borrar Libro"
           [autoClose]="true"
-          ngbPopover="Para borrar una Editorial, esta no debe tener ningún libro."
+          ngbPopover="Para borrar un Libro, este no debe tener ningún Ejemplar."
           #popover="ngbPopover"
           (shown)="onPopoverShow()"
           (hidden)="onPopoverHide()"
@@ -114,7 +119,36 @@
   </div>
   <app-modal-delete
     [messageConfirmation]="mensajeModal"
-    [crud]="'Editorial'"
+    [crud]="'Libro'"
     (confirmacionEvento)="handleDelete($event)"
   ></app-modal-delete>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ tituloSeleccionado }}</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <h5>Descripción</h5>
+    <p>
+      {{ descripcionSeleccionada }}
+    </p>
+    <hr />
+    <h5>Autor</h5>
+    <p>{{ autorSeleccionado }}</p>
+    <hr />
+    <h5>Editorial</h5>
+    <p>{{ editorialSeleccionada }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">
+      Cerrar
+    </button>
+  </div>
+</ng-template>

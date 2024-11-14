@@ -42,3 +42,13 @@ button {
 .successCustom {
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
 }
+
+.link-volver {
+  color: black;
+  font-size: 22px !important;
+  font-weight: 300;
+  cursor: pointer;
+}
+.link-volver:hover {
+  color: blue;
+}

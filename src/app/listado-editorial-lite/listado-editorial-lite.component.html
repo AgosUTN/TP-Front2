@@ -23,7 +23,7 @@
         <tbody>
           <tr
             *ngFor="let editorial of paginatedEditoriales"
-            (click)="emitirId(editorial.id!)"
+            (click)="emitirDatos(editorial.id!, editorial.nombre)"
           >
             <td>{{ editorial.id }}</td>
             <td>{{ editorial.nombre }}</td>

@@ -2,7 +2,8 @@ import { Component, Input, ViewChild, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditorialServicioService } from '../servicios/editorial-servicio.service.js';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+
 import {
   animate,
   state,
@@ -13,12 +14,11 @@ import {
 import { ModalErrorComponent } from '../modal-error/modal-error.component.js';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { unsubscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-editorial-alta',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ModalErrorComponent],
+  imports: [ReactiveFormsModule, CommonModule, ModalErrorComponent, RouterLink],
   templateUrl: './editorial-alta.component.html',
   styleUrl: './editorial-alta.component.css',
   animations: [

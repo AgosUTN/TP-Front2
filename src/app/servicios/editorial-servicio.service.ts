@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, catchError, throwError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Editorial, EditorialCount } from '../models/editorial.model.js';
 import {
   ApiResponseGetAll,
@@ -17,33 +17,24 @@ export class EditorialServicioService {
     const objeto = { nombre: data };
     return this.http.post<Editorial>(this.baseurl, objeto);
   }
-  updateEditorial(id: number, nombreEditorial: string): Observable<Editorial> {
+  updateEditorial(id: number, nombreEditorial: string): Observable<void> {
+    // Esto está mal, deberia "recibirse" un tipo editorial.
     const objeto = { nombre: nombreEditorial };
-    return this.http.patch<Editorial>(`${this.baseurl}/${id}`, objeto);
+    return this.http.patch<void>(`${this.baseurl}/${id}`, objeto);
   }
   getEditoriales(): Observable<EditorialCount[]> {
-    return this.http.get<ApiResponseGetAll<EditorialCount>>(this.baseurl).pipe(
-      map((response) => response.data),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<ApiResponseGetAll<EditorialCount>>(this.baseurl)
+      .pipe(map((response) => response.data));
   }
   getEditorial(id: number): Observable<Editorial> {
     return this.http
       .get<ApiResponseGetOne<Editorial>>(`${this.baseurl}/${id}`)
-      .pipe(
-        map((response) => response.data),
-        catchError(this.handleError)
-      );
+      .pipe(map((response) => response.data));
   }
 
   deleteEditorial(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseurl}/${id}`);
   }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error('Ocurrió un error', error);
-    return throwError(
-      () => new Error('Ocurrió un error al cargar las editoriales.')
-    );
-  } // Private para que no se pueda usar desde un componente.
 }
+// En teoría, es aceptable usar void para el delete/update en tanto no necesite mostrar el mensaje de la API.

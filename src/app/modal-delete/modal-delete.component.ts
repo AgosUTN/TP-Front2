@@ -30,6 +30,7 @@ export class ModalDeleteComponent {
     this.modalRef = this.modalService.open(this.content);
   }
 
+  // Recordar que el true lo recibis como parámetro al hacer click en borrar.
   closeModal(confirmacion: boolean = false) {
     if (this.modalRef) {
       this.modalRef.close();

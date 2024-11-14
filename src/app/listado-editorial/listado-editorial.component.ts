@@ -17,7 +17,6 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     ModalDeleteComponent,
-    ModalDeleteComponent,
     NgbPopoverModule,
   ],
   templateUrl: './listado-editorial.component.html',
@@ -65,11 +64,8 @@ export class ListadoEditorialComponent {
         this.updatePagination();
       },
       error: (err) => {
-        (this.editoriales = [{ id: 0, nombre: 'No data', cantLibros: 0 }]),
-          (this.error = err.message);
         console.log('Error al cargar las editoriales', err);
-        // No está mal, pero deberia incluir más feedback
-        // Usar un modal con el mensaje o una bandera para mostrar un div.
+
         //13/10/24 --> Usar un servicio que intercepte el status 0 para redirigir a un componente/pagina que informe la caida del servidor.
       },
     });
@@ -90,8 +86,6 @@ export class ListadoEditorialComponent {
       this.pageSize,
       this.currentPage
     );
-
-    this.fillEmptySlots();
   }
 
   nextPage() {
@@ -110,34 +104,26 @@ export class ListadoEditorialComponent {
     this.currentPage = page;
     this.updatePagination();
   }
-  fillEmptySlots() {
-    const itemsMissing = this.pageSize - this.paginatedEditoriales.length;
-    for (let i = 0; i < itemsMissing; i++) {
-      this.paginatedEditoriales.push({
-        id: undefined,
-        nombre: '',
-        cantLibros: 0,
-      });
-    }
-  }
 
-  eliminarEditorial1(id: number, nombre: string) {
+  openDeleteModal(id: number, nombre: string) {
     this.idEditorialBorrar = id;
     if (this.modalDeleteComponent) {
       this.modalDeleteComponent.open(nombre);
     }
   }
-  eliminarEditorial2() {
+  private deleteEditorial() {
     this.editorialServicio
       .deleteEditorial(this.idEditorialBorrar!)
       .subscribe((response) => {
         this.loadEditoriales();
         this.idEditorialBorrar = undefined;
       });
+    // No estoy manejando un error de borrado. (Bad request), me parece innecesario ensuciar el componente en este caso.
+    // Además de que ya hay feedback inmediato al ver que no se borro de la lista.
   }
   handleDelete(confirmacion: boolean) {
     if (confirmacion) {
-      this.eliminarEditorial2();
+      this.deleteEditorial();
     } else {
       console.log('Borrado cancelado');
       this.idEditorialBorrar = undefined;
