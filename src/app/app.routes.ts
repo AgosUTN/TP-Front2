@@ -5,9 +5,12 @@ import { Error404Component } from './error404/error404.component.js';
 import { ListadoEditorialComponent } from './listado-editorial/listado-editorial.component.js';
 import { LibroAltaComponent } from './libro-alta/libro-alta.component.js';
 import { LibroListadoComponent } from './libro-listado/libro-listado.component.js';
+import { ListadoPrestamoComponent } from './listado-prestamo/listado-prestamo.component.js';
 
 export const routes: Routes = [
-  { path: 'prestamoAlta', component: PrestamoAltaComponent },
+  { path: 'prestamo', redirectTo: 'prestamo/listado', pathMatch: 'full' },
+  { path: 'prestamo/listado', component: ListadoPrestamoComponent },
+  { path: 'prestamo/alta', component: PrestamoAltaComponent },
   { path: 'editorial', redirectTo: 'editorial/listado', pathMatch: 'full' },
   { path: 'editorial/actualizar/:id', component: EditorialAltaComponent },
   { path: 'editorial/alta', component: EditorialAltaComponent },
@@ -19,4 +22,5 @@ export const routes: Routes = [
   { path: '', redirectTo: 'prestamoAlta', pathMatch: 'full' },
   { path: '**', component: Error404Component },
 ];
+// No se siguió ningún estándar para los nombres.
 export const routing = RouterModule.forRoot(routes);

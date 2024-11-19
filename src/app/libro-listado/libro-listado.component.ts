@@ -48,7 +48,7 @@ export class LibroListadoComponent {
   pageSize = 10;
   paginatedLibros: LibroGetOne[] = [];
   searchField = 'titulo';
-  totalPages = 0;
+  totalPages = 1;
   currentPage = 1;
 
   isPopoverActive = false;
@@ -82,6 +82,7 @@ export class LibroListadoComponent {
     const filteredLibros = this.paginationService.filterItems(
       this.libros,
       searchValue,
+      undefined,
       this.searchField
     );
     this.totalPages = this.paginationService.getTotalPages(

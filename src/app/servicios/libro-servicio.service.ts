@@ -7,6 +7,7 @@ import {
   ApiResponseGetAll,
   ApiResponseGetOne,
 } from '../models/apiResponse.models.js';
+import { miEjemplar } from '../models/CuDevolverLibro.models.js';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,18 @@ export class LibroServicioService {
   }
   deleteLibro(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseurl}/${id}`);
+  }
+
+  getEjemplar(idLibro: number, idEjemplar: number): Observable<miEjemplar> {
+    return this.http
+      .get<ApiResponseGetOne<miEjemplar>>(
+        `${this.baseurl}/${idLibro}/ejemplares/${idEjemplar}`
+      )
+      .pipe(map((response) => response.data));
+  }
+  estaPendiente(idLibro: number, idEjemplar: number) {
+    return this.http.get<any>(
+      `${this.baseurl}/${idLibro}/ejemplares/${idEjemplar}/pendiente`
+    );
   }
 }

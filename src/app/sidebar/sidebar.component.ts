@@ -21,7 +21,7 @@ export class SidebarComponent {
       url: '/editorial',
     },
     { label: 'Autores', icon: 'fa-solid fa-feather', url: '/autor' },
-    { label: 'Sanciones', icon: '', url: '/sancion' },
+    { label: 'Sanciones', icon: 'fa-solid fa-gavel', url: '/sancion' },
   ];
 
   @Input() sidebarActive = false;

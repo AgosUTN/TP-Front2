@@ -36,7 +36,7 @@ export class ListadoEditorialComponent {
 
   // Inicializaciones
   currentPage = 1;
-  totalPages = 0;
+  totalPages = 1;
   isPopoverActive = false;
 
   searchText = new FormControl('');
@@ -75,6 +75,7 @@ export class ListadoEditorialComponent {
     const filteredEditoriales = this.paginationService.filterItems(
       this.editoriales,
       searchValue,
+      undefined,
       this.searchField
     );
     this.totalPages = this.paginationService.getTotalPages(

@@ -11,13 +11,25 @@ export class PaginationService {
     const endIndex = startIndex + pageSize;
     return items.slice(startIndex, endIndex);
   }
-  filterItems(items: any[], searchText: string, searchField: string): any[] {
-    if (!searchText) return items;
+  filterItems(
+    items: any[],
+    searchText: string | undefined,
+    searchNumber: number | undefined,
+    searchField: string
+  ): any[] {
+    if (!searchText && !searchNumber) return items;
 
-    searchText = searchText.toLowerCase();
-    return items.filter((item) =>
-      item[searchField].toLowerCase().includes(searchText)
-    );
+    if (searchText) {
+      searchText = searchText.toLowerCase();
+      items = items.filter((item) =>
+        item[searchField].toLowerCase().includes(searchText)
+      );
+    }
+
+    if (searchNumber) {
+      items = items.filter((item) => item[searchField] === searchNumber);
+    }
+    return items;
   }
 
   getTotalPages(items: any[], pageSize: number): number {
