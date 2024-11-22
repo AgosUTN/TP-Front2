@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: 'libro/alta', component: LibroAltaComponent },
   { path: 'libro/listado', component: LibroListadoComponent },
   { path: '', redirectTo: 'prestamoAlta', pathMatch: 'full' },
+  { path: 'error', component: Error404Component },
   { path: '**', component: Error404Component },
 ];
 // No se siguió ningún estándar para los nombres.

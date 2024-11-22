@@ -165,6 +165,7 @@ export class ListadoPrestamoComponent {
           } else {
             this.lineaPrestamoActual = 0;
             this.openModalError();
+            this.router.navigate(['/404']);
           }
         },
         error: (err) => {

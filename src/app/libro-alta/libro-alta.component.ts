@@ -11,7 +11,7 @@ import {
   isbnValidator,
   notUndefinedValidator,
   positiveIntegerValidator,
-} from '../../validations/validations.js';
+} from '../utils/validations.js';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { ListadoEditorialLiteComponent } from '../listado-editorial-lite/listado-editorial-lite.component';
