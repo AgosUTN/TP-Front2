@@ -52,7 +52,6 @@ export class ListadoPrestamoComponent {
   bodyDevolucion = '';
 
   @ViewChild(ModalErrorComponent) modalErrorComponent!: ModalErrorComponent;
-  devolucionFinalizada = false;
 
   prestamoModal: Prestamo = {
     id: 0,
@@ -134,10 +133,15 @@ export class ListadoPrestamoComponent {
       scrollable: true,
     });
   }
-  closeModal() {
+  closeModals() {
     if (this.modalRef) {
       this.modalRef.close();
     }
+    if (this.modalRefDevolucion) {
+      this.modalRefDevolucion.close();
+    }
+  }
+  closeModalDevolucion() {
     if (this.modalRefDevolucion) {
       this.modalRefDevolucion.close();
     }
@@ -190,7 +194,8 @@ export class ListadoPrestamoComponent {
             this.bodyDevolucion =
               'La devolución del préstamo ha sido registrada con éxito.';
           }
-          this.devolucionFinalizada = true;
+
+          this.closeModals();
           this.loadPrestamos();
         },
 

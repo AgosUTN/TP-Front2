@@ -133,7 +133,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="closeModal()"
+      (click)="closeModals()"
     ></button>
   </div>
   <div class="modal-body">
@@ -187,11 +187,11 @@
           Devolver libro
         </button>
       </div>
+      <hr />
     </div>
-    <hr />
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="closeModal()">
+    <button type="button" class="btn btn-secondary" (click)="closeModals()">
       Cerrar
     </button>
   </div>
@@ -203,26 +203,20 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="closeModal()"
+      (click)="closeModalDevolucion()"
     ></button>
   </div>
   <div class="modal-body">
     <p class="pModalLinea">{{ bodyDevolucion }}</p>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="submitDevolucion()"
-      [disabled]="devolucionFinalizada"
-    >
+    <button type="button" class="btn btn-primary" (click)="submitDevolucion()">
       Confirmar actualización
     </button>
     <button
       type="button"
       class="btn btn-danger"
-      (click)="closeModal()"
-      [disabled]="devolucionFinalizada"
+      (click)="closeModalDevolucion()"
     >
       Cancelar
     </button>
